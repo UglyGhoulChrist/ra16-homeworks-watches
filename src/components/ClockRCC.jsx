@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import styles from "./Clock.module.css";
+const moment = require("moment");
 
 class ClockRCC extends Component {
   constructor(props) {
     super(props);
-    this.state = { date: new Date() };
+    this.state = { time: moment().utc(this.offsetMinutes).format("HH:mm:ss") }; // время с учетом смещения
   }
 
   componentDidMount() {
     this.interval = setInterval(
       () =>
         this.setState({
-          date: new Date(),
+          time: moment().utc(this.offsetMinutes).format("HH:mm:ss"), // время с учетом смещения
         }),
       1000
     );
@@ -26,10 +27,8 @@ class ClockRCC extends Component {
       <div className={styles.clock}>
         <button className={styles.button}>&#10060;</button>
         <div className={styles.component}>React Class Component</div>
-        <div className={styles.city}>Москва</div>
-        <div className={styles.time}>
-          {this.state.date.toLocaleTimeString()}
-        </div>
+        <div className={styles.city}>{this.props.city}</div>
+        <div className={styles.time}>{this.state.time}</div>
       </div>
     );
   }
