@@ -32,7 +32,7 @@ function Form() {
           onChange={(event) => setTimezone(event.target.value)}
         />
       </label>
-      <button>Добавить</button>
+      <button className={styles.button}>Добавить</button>
     </form>
   );
 }

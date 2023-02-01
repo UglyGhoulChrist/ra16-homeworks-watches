@@ -1,0 +1,29 @@
+.clock {
+    width: fit-content;
+    border: 2px solid black;
+    border-radius: .5rem;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+}
+
+.button {
+    position: absolute;
+    top: .125rem;
+    right: .125rem;
+    border: none;
+    background: inherit;
+    cursor: pointer;
+}
+
+.time {
+    font-size: 1.5rem;
+}
+
+.component {
+    font-size: 0.75rem;
+    opacity: .5;
+}
