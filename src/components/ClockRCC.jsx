@@ -5,14 +5,16 @@ const moment = require("moment");
 class ClockRCC extends Component {
   constructor(props) {
     super(props);
-    this.state = { time: moment().utc(this.offsetMinutes).format("HH:mm:ss") }; // время с учетом смещения
+    this.state = {
+      time: moment().utc(this.props.offsetMinutes).format("HH:mm:ss"),
+    }; // время с учетом смещения
   }
 
   componentDidMount() {
     this.interval = setInterval(
       () =>
         this.setState({
-          time: moment().utc(this.offsetMinutes).format("HH:mm:ss"), // время с учетом смещения
+          time: moment().utc(this.props.offsetMinutes).format("HH:mm:ss"), // время с учетом смещения
         }),
       1000
     );

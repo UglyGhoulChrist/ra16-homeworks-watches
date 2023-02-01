@@ -5,17 +5,29 @@ import ClockRCC from "./components/ClockRCC";
 import Form from "./components/Form";
 
 function App() {
-  const [clock, setClock] = useState({
-    city: "Greenwich Mean Time",
-    offsetMinutes: 0,
-  });
+  const [clocks, setClocks] = useState([
+    {
+      city: "Greenwich Mean Time",
+      offsetMinutes: 0,
+    },
+  ]);
+
+  const handleAddClocks = (newClock) => {
+    setClocks([...clocks, newClock]);
+    console.log("newClock", newClock);
+  };
 
   return (
     <div className="App">
-      <Form />
+      <Form handleAddClocks={handleAddClocks} />
       <div className="clocks">
-        <ClockRFC {...clock} />
-        <ClockRCC {...clock} />
+        {clocks.map((clock, idx) => (
+          <ClockRFC key={idx} idx={idx} {...clock} />
+        ))}
+
+        {clocks.map((clock, idx) => (
+          <ClockRCC key={idx} {...clock} />
+        ))}
       </div>
     </div>
   );

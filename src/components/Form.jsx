@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Form.module.css";
 
-function Form() {
+function Form({ handleAddClocks }) {
   const [city, setCity] = useState("");
   const [timezone, setTimezone] = useState("");
 
@@ -9,6 +9,7 @@ function Form() {
     event.preventDefault();
     if (city.trim().length > 0 && 0 <= timezone && timezone < 24) {
       console.log(city.trim(), timezone);
+      handleAddClocks({ city: city.trim(), offsetMinutes: +timezone * 60 });
       setCity("");
       setTimezone("");
     }
