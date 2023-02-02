@@ -6,27 +6,38 @@ import Form from "./components/Form";
 
 function App() {
   const [clocks, setClocks] = useState([
-    {
-      city: "Greenwich Mean Time",
-      offsetMinutes: 0,
-    },
+    { id: 1, city: "Greenwich Mean Time", offsetMinutes: 0 },
   ]);
 
-  const handleAddClocks = (newClock) => {
+  const handleAddClock = (newClock) => {
     setClocks([...clocks, newClock]);
-    console.log("newClock", newClock);
+  };
+
+  const hadleDeleteClock = (id) => {
+    setClocks([...clocks.filter((clock) => clock.id !== id)]);
   };
 
   return (
     <div className="App">
-      <Form handleAddClocks={handleAddClocks} />
+      <h1>Цифровые часы городов в разных часовых поясах</h1>
+      <h2>Часы дублируются. Функциональный компонент + классовый компонент</h2>
+      <br />
+      <Form handleAddClock={handleAddClock} />
       <div className="clocks">
-        {clocks.map((clock, idx) => (
-          <ClockRFC key={idx} idx={idx} {...clock} />
+        {clocks.map((clock) => (
+          <ClockRFC
+            hadleDeleteClock={hadleDeleteClock}
+            key={clock.id}
+            {...clock}
+          />
         ))}
 
-        {clocks.map((clock, idx) => (
-          <ClockRCC key={idx} {...clock} />
+        {clocks.map((clock) => (
+          <ClockRCC
+            hadleDeleteClock={hadleDeleteClock}
+            key={clock.id}
+            {...clock}
+          />
         ))}
       </div>
     </div>

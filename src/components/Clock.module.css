@@ -1,5 +1,6 @@
 .clock {
-    width: fit-content;
+    flex: 1 0 290px;
+
     border: 2px solid black;
     border-radius: .5rem;
     padding: 1rem;

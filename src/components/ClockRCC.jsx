@@ -27,7 +27,12 @@ class ClockRCC extends Component {
   render() {
     return (
       <div className={styles.clock}>
-        <button className={styles.button}>&#10060;</button>
+        <button
+          onClick={() => this.props.hadleDeleteClock(this.props.id)}
+          className={styles.button}
+        >
+          &#10060;
+        </button>
         <div className={styles.component}>React Class Component</div>
         <div className={styles.city}>{this.props.city}</div>
         <div className={styles.time}>{this.state.time}</div>
