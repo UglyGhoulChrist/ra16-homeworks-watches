@@ -10,6 +10,7 @@ function App() {
   ]);
 
   const handleAddClock = (newClock) => {
+    console.log("newClock", newClock);
     setClocks([...clocks, newClock]);
   };
 

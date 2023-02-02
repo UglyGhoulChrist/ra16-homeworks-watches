@@ -6,7 +6,7 @@ class ClockRCC extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: moment().utc(this.props.offsetMinutes).format("HH:mm:ss"),
+      time: moment().utcOffset(this.props.offsetMinutes).format("HH:mm:ss"),
     }; // время с учетом смещения
   }
 
@@ -14,7 +14,7 @@ class ClockRCC extends Component {
     this.interval = setInterval(
       () =>
         this.setState({
-          time: moment().utc(this.props.offsetMinutes).format("HH:mm:ss"), // время с учетом смещения
+          time: moment().utcOffset(this.props.offsetMinutes).format("HH:mm:ss"), // время с учетом смещения
         }),
       1000
     );

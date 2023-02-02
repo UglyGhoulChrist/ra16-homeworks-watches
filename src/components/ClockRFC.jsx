@@ -11,14 +11,14 @@ function ClockRFC({ id, city, offsetMinutes, hadleDeleteClock }) {
    * @param {function} hadleDeleteClock - Удаление часов в родительском элементе по ИД
    * @return {HTMLElement} - HTML разметка цифровых часов
    */
-
+  console.log("offsetMinutes", offsetMinutes);
   const [timer, setTimer] = useState(
-    moment().utc(offsetMinutes).format("HH:mm:ss") // время с учетом смещения
+    moment().utcOffset(offsetMinutes).format("HH:mm:ss") // время с учетом смещения
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimer(moment().utc(offsetMinutes).format("HH:mm:ss")); // время с учетом смещения
+      setTimer(moment().utcOffset(offsetMinutes).format("HH:mm:ss")); // время с учетом смещения
     }, 1000);
     return () => clearInterval(interval);
   }, [offsetMinutes]);
