@@ -8,7 +8,6 @@ function Form({ handleAddClock }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (city.trim().length > 0 && -12 <= timezone && timezone <= +14) {
-      console.log("timezone", timezone);
       handleAddClock({
         id: Math.random(),
         city: city.trim(),

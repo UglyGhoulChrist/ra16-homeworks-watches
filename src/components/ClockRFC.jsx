@@ -11,14 +11,18 @@ function ClockRFC({ id, city, offsetMinutes, hadleDeleteClock }) {
    * @param {function} hadleDeleteClock - Удаление часов в родительском элементе по ИД
    * @return {HTMLElement} - HTML разметка цифровых часов
    */
-  console.log("offsetMinutes", offsetMinutes);
-  const [timer, setTimer] = useState(
-    moment().utcOffset(offsetMinutes).format("HH:mm:ss") // время с учетом смещения
-  );
+
+  // !  Где-то встречал, если начальное значение вычисляемое,
+  // ! то в useState передаём вычисление как колбэк функцию, иначе будет куча лишних вычислений.
+  function timeNow() {
+    return moment().utcOffset(offsetMinutes).format("HH:mm:ss"); // время с учетом смещения
+  }
+
+  const [timer, setTimer] = useState(() => timeNow());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimer(moment().utcOffset(offsetMinutes).format("HH:mm:ss")); // время с учетом смещения
+      setTimer(timeNow);
     }, 1000);
     return () => clearInterval(interval);
   }, [offsetMinutes]);
