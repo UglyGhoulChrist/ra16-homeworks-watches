@@ -7,7 +7,7 @@ function Form({ handleAddClock }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (city.trim().length > 0 && 0 <= timezone && timezone < 24) {
+    if (city.trim().length > 0 && -12 <= timezone && timezone < +14) {
       handleAddClock({
         id: Math.random(),
         city: city.trim(),
@@ -30,7 +30,7 @@ function Form({ handleAddClock }) {
         />
       </label>
       <label className={styles.label}>
-        Временная зона
+        Временная зона -12 ... +14
         <input
           value={timezone}
           placeholder="Разница в часах"
