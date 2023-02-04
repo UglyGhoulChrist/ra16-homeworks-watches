@@ -1,6 +1,5 @@
 .clock {
     /* flex: 0 0 290px; */
-
     border: 2px solid black;
     border-radius: .5rem;
     padding: 1rem;
@@ -20,11 +19,100 @@
     cursor: pointer;
 }
 
-.time {
-    font-size: 1.5rem;
+/* Часы  */
+.case {
+    /* Круг для часов */
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 4px solid #000;
+    border-radius: 50%;
 }
 
-.component {
-    font-size: 0.75rem;
-    opacity: .5;
+/* Часовая стрелка */
+.hour {
+    /*Позиционируем относительно .hasy */
+    position: absolute;
+    /* Толщина стрелки */
+    width: 6px;
+    /* Длина стрелки */
+    height: 50px;
+    /*Положение стрелки*/
+    left: 50%;
+    top: 50%;
+    background: blue;
+    transform-origin: 0 0;
+    z-index: 7;
+}
+
+/* Минутная стрелка */
+.minute {
+    position: absolute;
+    width: 4px;
+    height: 70px;
+    left: 50%;
+    top: 50%;
+    background: blueviolet;
+    transform-origin: 0 0;
+    z-index: 8;
+}
+
+/* Секундная стрелка */
+.second {
+    position: absolute;
+    width: 2px;
+    height: 80px;
+    left: 50%;
+    top: 50%;
+    background: green;
+    transform-origin: 0 0;
+    z-index: 9;
+}
+
+.twelve,
+.three,
+.six,
+.nine {
+    /* Цифры на циферблате */
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: darkred;
+}
+
+.twelve {
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.three {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 3px;
+}
+
+.six {
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nine {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 3px;
+}
+
+.center {
+    /* Центр циферблата */
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #000;
+    z-index: 10;
 }

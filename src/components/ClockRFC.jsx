@@ -14,15 +14,25 @@ function ClockRFC({ id, city, offsetMinutes, hadleDeleteClock }) {
 
   // !  Где-то встречал, если начальное значение вычисляемое,
   // ! то в useState передаём вычисление как колбэк функцию, иначе будет куча лишних вычислений.
-  function timeNow() {
-    return moment().utcOffset(offsetMinutes).format("HH:mm:ss"); // время с учетом смещения
+
+  // Высчитывает поворот стрелок
+  function calcRotation() {
+    const now = moment().utcOffset(offsetMinutes); // время с учетом смещения
+    const rotate = {
+      hour: `rotate(${
+        180 + now.format("hh") * 30 + now.format("mm") * 0.5
+      }deg)`,
+      minute: `rotate(${180 + now.format("mm") * 6}deg)`,
+      secundes: `rotate(${180 + now.format("ss") * 6}deg)`,
+    };
+    return rotate;
   }
 
-  const [timer, setTimer] = useState(() => timeNow());
+  const [turnArrow, setTurnArrow] = useState(() => calcRotation());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimer(timeNow);
+      setTurnArrow(calcRotation);
     }, 1000);
     return () => clearInterval(interval);
   }, [offsetMinutes]);
@@ -32,9 +42,32 @@ function ClockRFC({ id, city, offsetMinutes, hadleDeleteClock }) {
       <button onClick={() => hadleDeleteClock(id)} className={styles.button}>
         &#10060;
       </button>
-      <div className={styles.component}>React Functional Component</div>
       <div className={styles.city}>{city}</div>
-      <div className={styles.time}>{timer}</div>
+      <div className={styles.case}>
+        <div className={styles.twelve}>12</div>
+        <div className={styles.three}>3</div>
+        <div className={styles.six}>6</div>
+        <div className={styles.nine}>9</div>
+        <div
+          className={styles.second}
+          style={{
+            transform: `${turnArrow.secundes} translateX(-50%)`,
+          }}
+        ></div>
+        <div
+          className={styles.minute}
+          style={{
+            transform: `${turnArrow.minute} translateX(-50%)`,
+          }}
+        ></div>
+        <div
+          className={styles.hour}
+          style={{
+            transform: `${turnArrow.hour} translateX(-50%)`,
+          }}
+        ></div>
+        <div className={styles.center}></div>
+      </div>
     </div>
   );
 }
